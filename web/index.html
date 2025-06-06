@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+window.onload = () => {
+    const url_start = `http://${location.hostname}:8000/cgi-bin/video_start-cgi.py`
+    const url_stop= `http://${location.hostname}:8000/cgi-bin/video_stop-cgi.py`
+    let es_start = null
+    
+    startbn.onclick = () => {
+        if (es_start != null) {
+            return
+        }
+        console.log("start")
+        es_start = new EventSource(url_start)
+        es_start.onmessage = (event) => {
+            image.src = `data:image/jpeg;base64,${event.data}`
+        }
+    }
+
+    stopbn.onclick = () => {
+        console.log("stop")
+        image.src = "close.jpg"
+        const es = new EventSource(url_stop)
+        es.close()
+        es_start.close()
+        es_start = null
+    }
+}    
+</script>    
+<body>
+    <button id="startbn">Start</button>
+    <button id="stopbn">Stop</button><p></p>
+    <img id="image" src="close.jpg"><p></p>
+</body>
+</html>

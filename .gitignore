@@ -1,0 +1,5 @@
+# 忽略 model 資料夾中的所有檔案
+model/
+# 但是保留 model 目錄本身
+!model/.gitkeep
+.DS_Store
