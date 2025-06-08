@@ -45,11 +45,13 @@ with vision.FaceLandmarker.create_from_options(options) as landmarker:
         # 將 BGR 轉成 RGB
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         # 轉成 mediapipe Image
-        mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
+        mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
         # 進行偵測
-        landmarker.dietect_async(mp_image, int(time.time() * 1000))
-        frame = result_queue.get()
+        landmarker.detect_async(mp_image, int(time.time() * 1000))
+        frame = result_queue.get()  # 可加上 timeout 避免阻塞過久
 
+        # 顯示前先轉回 BGR
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         cv2.imshow('Face Landmarks', frame)
         if cv2.waitKey(1) == 27:  # 按下 ESC 離開
             break
