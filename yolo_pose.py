@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 import cv2
 
-# url = 'https://cctv-ss04.thb.gov.tw/T14A-d61a0c91'
-url = 'data/vtest.avi'
+url = 'https://cctv-ss04.thb.gov.tw/T14A-d61a0c91'
+# url = 'data/vtest.avi'
 model = YOLO('model/yolo11m-pose.pt')
 cap = cv2.VideoCapture(url)
 while True:
