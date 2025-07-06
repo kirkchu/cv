@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 讀取圖檔
-image = cv2.imread('data/zebra.jpg')
+image = cv2.imread('data/duck.jpg')
 
 # 檢查圖檔是否成功讀取
 if image is None:

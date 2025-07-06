@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 import cv2
 
-image_path = 'data/test_lion.jpg'
+image_path = 'data/test_elephant.jpg'
 model = YOLO('model/runs/classify/train/weights/best.pt')
 results = model(image_path)[0]
 

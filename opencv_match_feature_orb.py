@@ -3,8 +3,8 @@ import cv2
 # imgs = ['data/duck.jpg', 'data/duck2.jpg']
 # imgs = ['data/duck.jpg', 'data/duck3.jpg']
 # imgs = ['data/duck.jpg', 'data/zebra.jpg']
-imgs = ['data/duck.jpg', 'data/chair.jpg']
-# imgs = ['data/zebra.jpg', 'data/zebra2.jpg']
+# imgs = ['data/duck.jpg', 'data/chair.jpg']
+imgs = ['data/zebra.jpg', 'data/zebra2.jpg']
 
 img1 = cv2.imread(imgs[0])
 img2 = cv2.imread(imgs[1])
