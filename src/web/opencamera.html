@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const websocket = new WebSocket("ws://localhost:8765");
+
+        websocket.onopen = () => {
+            console.log("WebSocket connection established.");
+            const video = document.createElement("video");
+            video.autoplay = true;
+            document.body.appendChild(video);
+
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    const canvas = document.createElement("canvas");
+                    const context = canvas.getContext("2d");
+
+                    setInterval(() => {
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                        canvas.toBlob(blob => {
+                            if (websocket.readyState === WebSocket.OPEN) {
+                                websocket.send(blob);
+                            }
+                        }, "image/jpeg");
+                    }, 100);
+                })
+                .catch(error => {
+                    console.error("Error accessing camera:", error);
+                });
+        };
+
+        websocket.onclose = () => {
+            console.log("WebSocket connection closed.");
+        };
+
+        websocket.onerror = error => {
+            console.error("WebSocket error:", error);
+        };
+    </script>
+</body>
+</html>
