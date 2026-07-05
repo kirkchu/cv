@@ -39,6 +39,8 @@ decorate_image = cv2.imread(decorate_image_path, cv2.IMREAD_UNCHANGED)
 if decorate_image is None:
     raise FileNotFoundError(f"Image not found at {decorate_image_path}")
 
+frame_timestamp = 0  # 自訂遞增時間戳
+
 while True:
     ret, image = cap.read()
     if not ret:
@@ -49,8 +51,9 @@ while True:
     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_image)
 
-    # 偵測人臉地標
-    results = face_landmarker.detect_for_video(mp_image, int(cap.get(cv2.CAP_PROP_POS_MSEC)))
+    # 偵測人臉地標（時間戳需手動遞增）
+    frame_timestamp += 1
+    results = face_landmarker.detect_for_video(mp_image, frame_timestamp)
     # print(len(results.face_landmarks))
 
     # 繪製地標

@@ -11,7 +11,8 @@ detections = DeepFace.extract_faces(
 
 # 畫出 bounding box
 for face in detections:
-    x, y, w, h, _, _ = face['facial_area'].values()
+    area = face['facial_area']
+    x, y, w, h = area['x'], area['y'], area['w'], area['h']
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 # 顯示結果到螢幕上

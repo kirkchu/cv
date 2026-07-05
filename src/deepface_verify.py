@@ -1,12 +1,16 @@
 from deepface import DeepFace
-import cv2
 from operator import itemgetter
+import cv2
 
 img1 = cv2.imread("src/face/face1.jpg")
 img2 = cv2.imread("src/face/face3.jpg")
 # 使用 DeepFace 進行人臉比對
 result = DeepFace.verify(
-    img1_path=img1, img2_path=img2, model_name='Facenet')
+    img1_path=img1, 
+    img2_path=img2, 
+    model_name='Facenet', 
+    detector_backend='retinaface'
+)
 print(result)
 color = (0, 255, 0) if result['verified'] else (0, 0, 255)  # 綠色或紅色 
 

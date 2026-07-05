@@ -23,7 +23,8 @@ while True:
             enforce_detection=False, 
             silent=True, 
             anti_spoofing=True, 
-            model_name="Facenet"
+            model_name="Facenet",
+            # detector_backend="retinaface"
         )
         if len(result) > 0 and len(result[0]) > 0:
             best_match = result[0].iloc[0]

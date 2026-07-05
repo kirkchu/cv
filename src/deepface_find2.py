@@ -6,14 +6,18 @@ source_img = "src/face/find_test1.jpg"
 db_path = "src/face/database"
 
 # 執行人臉辨識
-results = DeepFace.find(img_path=source_img, db_path=db_path)
+results = DeepFace.find(
+    img_path=source_img, 
+    db_path=db_path,
+    detector_backend="retinaface"
+)
 
 # 根據結果輸出 identity 或 ❌
 if len(results) > 0 and not results[0].empty:
     identity = results[0].iloc[0]['identity']
     parts = identity.split("/")
     if len(parts) >= 3:
-        label = parts[2]
+        label = parts[-2]   # 取得倒數第二個部分作為標籤，也就是目錄名稱
         img = cv2.imread(source_img)
         cv2.putText(img, label, (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
         cv2.imshow("Result", img)

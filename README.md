@@ -30,7 +30,21 @@
 - **其他**
   - `src/ocr_carplate.py` — 使用 EasyOCR 的車牌範例（範例圖：`src/data/carplate.jpg`）。
   - `src/pytorch_mnist_*` — MNIST 訓練與測試工具。
-  - `src/rps` — 剪刀石頭布示範資源。
+  ---
+
+## ⚠️ 已知問題：opencv-python 可能缺少 haarcascade XML
+
+`opencv-python` 的 PyPI wheel 不一定會打包 OpenCV 原始碼中的 Cascade 分類器 XML 檔（位於 OpenCV 官方 repo 的 `data/haarcascades/`），因此 `cv2/data/` 目錄下可能找不到 `haarcascade_frontalface_default.xml` 等檔案。
+
+解決方式：從 OpenCV GitHub 手動下載需要的 XML 檔到 `cv2/data/` 目錄：
+
+```bash
+curl -L -o /path/to/venv/lib/python3.12/site-packages/cv2/data/haarcascade_frontalface_default.xml \
+  "https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml"
+
+curl -L -o /path/to/venv/lib/python3.12/site-packages/cv2/data/haarcascade_eye.xml \
+  "https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml"
+```
 
 ---
 

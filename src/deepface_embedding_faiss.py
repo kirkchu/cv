@@ -19,7 +19,7 @@ for img in imgs:
     result = DeepFace.represent(img, model_name="Facenet512")
     emb.append(result[0]["embedding"])
 
-dimension = 512  # embedding 向量維度
+dimension = 512  # Facenet512 embedding 向量維度
 index = faiss.IndexFlatL2(dimension)
 index.add(np.array(emb).astype("float32"))
 
