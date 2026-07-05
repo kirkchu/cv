@@ -11,19 +11,18 @@ SAM 3 基本範例：用文字提示 "chair" 找出 src/chair.jpg 中的椅子�
 import cv2
 from ultralytics.models.sam import SAM3SemanticPredictor
 
-IMAGE_PATH = 'src/data/bus.jpg'
+IMAGE_PATH = 'src/data/chair.jpg'
 MODEL_PATH = 'model/sam3.pt'
 
 # 建立 SAM 3 predictor，設定信心閾值與模型路徑
-overrides = dict(conf=0.25, task='segment', mode='predict', model=MODEL_PATH, save=True)
+overrides = dict(conf=0.25, task='segment', mode='predict', model=MODEL_PATH, save=False)
 predictor = SAM3SemanticPredictor(overrides=overrides)
 
 # 載入圖片
 predictor.set_image(IMAGE_PATH)
 
 # 用文字提示 "chair" 找出所有椅子
-# results = predictor(text=['chair'])[0]
-results = predictor(text=['bus'])[0]
+results = predictor(text=['chair'])[0]
 
 # 顯示結果 (畫上遮罩與框線)
 annotated = results.plot()
