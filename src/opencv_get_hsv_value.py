@@ -1,7 +1,7 @@
-from colorfilters.colorfilters import HSVFilter
+from colorfilters import HSVFilter
 import cv2 as cv
 
-img = cv.imread('sample.png')
+img = cv.imread('src/data/color_groundtruth.png')
 
 height, width, channel = img.shape
 ratio = width / height

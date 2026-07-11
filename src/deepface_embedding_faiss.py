@@ -16,7 +16,7 @@ source_img = "src/face/find_test2.jpg"
 
 emb = []
 for img in imgs:
-    result = DeepFace.represent(img, model_name="Facenet512")
+    result = DeepFace.represent(img, model_name="Facenet512", detector_backend='retinaface')
     emb.append(result[0]["embedding"])
 
 dimension = 512  # Facenet512 embedding 向量維度
@@ -27,7 +27,7 @@ print("索引庫準備完成！")
 print(f"索引庫大小: {index.ntotal}")
 print(f"索引庫維度: {index.d}")
 
-source_emb = DeepFace.represent(source_img, model_name="Facenet512")
+source_emb = DeepFace.represent(source_img, model_name="Facenet512", detector_backend='retinaface')
 D, I = index.search(np.array([source_emb[0]["embedding"]]).astype("float32"), k=1)  # 取最相近的1筆
 name = names[I[0][0]]
 

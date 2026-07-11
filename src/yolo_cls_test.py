@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 import cv2
 
-image_path = 'src/data/test_elephant.jpg'
-model = YOLO('src/../model/runs/classify/train/weights/best.pt')
+image_path = 'src/data/test_wolf.jpg'
+model = YOLO('model/runs/classify/train/weights/best.pt')
 results = model(image_path)[0]
 
 top1_class_id = results.probs.top1  # 最可能的類別編號

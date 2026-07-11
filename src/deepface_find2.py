@@ -15,6 +15,8 @@ results = DeepFace.find(
 # 根據結果輸出 identity 或 ❌
 if len(results) > 0 and not results[0].empty:
     identity = results[0].iloc[0]['identity']
+    identity = identity.replace("\\", "/")  # 將反斜線替換為正斜線
+    print(identity)
     parts = identity.split("/")
     if len(parts) >= 3:
         label = parts[-2]   # 取得倒數第二個部分作為標籤，也就是目錄名稱

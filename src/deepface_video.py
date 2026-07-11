@@ -29,6 +29,7 @@ while True:
         if len(result) > 0 and len(result[0]) > 0:
             best_match = result[0].iloc[0]
             identity = best_match['identity']
+            identity = identity.replace("\\", "/")  # 將反斜線替換為正斜線
             parts = identity.split('/')
             name = parts[-2] if len(parts) > 1 else identity
 
