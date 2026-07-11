@@ -35,7 +35,7 @@ name = names[I[0][0]]
 import cv2
 
 img = cv2.imread(source_img)
-cv2.putText(img, name, (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+cv2.putText(img, name, (30, 50), (0, 255, 0), cv2.FontFace("sans"), 22)
 cv2.imshow("Result", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

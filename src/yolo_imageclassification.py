@@ -31,7 +31,7 @@ alpha = 0.7
 # 將半透明背景與原圖合成
 cv2.addWeighted(overlay, alpha, img, 1 - alpha, 0, img)
 # 繪製黑色文字
-cv2.putText(img, label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2)
+cv2.putText(img, label, (x, y), (0, 0, 0), cv2.FontFace("sans"), 32)
 
 # 顯示圖片
 cv2.imshow("YOLO Classification Result", img)

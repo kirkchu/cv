@@ -214,8 +214,8 @@ def main():
                             cv2.circle(annotated_image, (x, y), 5, joint_color, -1) 
                             
                             # 標上編號 (白色文字)
-                            cv2.putText(annotated_image, str(idx), (x + 8, y - 8), 
-                                        cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1, cv2.LINE_AA)
+                            cv2.putText(annotated_image, str(idx), (x + 8, y - 8),
+                                        (255, 255, 255), cv2.FontFace("sans"), 13)
 
                         # 收集左右手五個指尖的像素座標
                         for tip_idx in fingertip_indices:

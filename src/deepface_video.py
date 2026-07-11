@@ -40,12 +40,12 @@ while True:
             else:
                 confidence = max(0.0, min(1.0, 1.0 - distance))
 
-            cv2.putText(frame, f"Match: {name}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
-            cv2.putText(frame, f"Confidence: {confidence * 100:.1f}%", (20, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
+            cv2.putText(frame, f"Match: {name}", (20, 40), (0, 255, 0), cv2.FontFace("sans"), 32)
+            cv2.putText(frame, f"Confidence: {confidence * 100:.1f}%", (20, 80), (0, 255, 0), cv2.FontFace("sans"), 26)
         else:
-            cv2.putText(frame, "Unknown", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+            cv2.putText(frame, "Unknown", (20, 40), (0, 0, 255), cv2.FontFace("sans"), 32)
     except Exception as e:
-        cv2.putText(frame, "Error", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+        cv2.putText(frame, "Error", (20, 40), (0, 0, 255), cv2.FontFace("sans"), 32)
 
     cv2.imshow("DeepFace Video Recognition", frame)
     if cv2.waitKey(1) == 27:

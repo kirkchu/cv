@@ -23,7 +23,7 @@ for result in results.boxes:
     # 繪製矩形框
     cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
     # 在矩形框上顯示物件名稱
-    cv2.putText(image, name, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    cv2.putText(image, name, (x1, y1 - 10), (0, 255, 0), cv2.FontFace("sans"), 16)
 
 # 顯示結果影像
 cv2.imshow('Detected Objects', image)

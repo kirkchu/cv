@@ -62,7 +62,7 @@ for i, cnt in enumerate(contours):
         text_y = min(text_y, img_color.shape[0] - 5)
         cv2.putText(
             img_color, label, (text_x, text_y),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2
+            (255, 0, 0), cv2.FontFace("sans"), 22
         )
 
 # 顯示圖片（使用 matplotlib）

@@ -21,7 +21,7 @@ if len(results) > 0 and not results[0].empty:
     if len(parts) >= 3:
         label = parts[-2]   # 取得倒數第二個部分作為標籤，也就是目錄名稱
         img = cv2.imread(source_img)
-        cv2.putText(img, label, (30, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        cv2.putText(img, label, (30, 60), (0, 255, 0), cv2.FontFace("sans"), 26)
         cv2.imshow("Result", img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
