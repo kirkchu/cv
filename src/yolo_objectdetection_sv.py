@@ -3,13 +3,13 @@ import supervision as sv
 from ultralytics import YOLO
 
 image = cv2.imread('src/data/bus.jpg')
-model = YOLO("src/../model/yolo26n.pt")
+model = YOLO("model/yolo26n.pt")
 results = model(image)[0]
+detections = sv.Detections.from_ultralytics(results)
 
 box_annotator = sv.BoxAnnotator()
 label_annotator = sv.LabelAnnotator()
 
-detections = sv.Detections.from_ultralytics(results)
 annotated_image = box_annotator.annotate(
     scene=image, detections=detections)
 annotated_image = label_annotator.annotate(

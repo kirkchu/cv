@@ -2,7 +2,7 @@ import cv2
 import supervision as sv
 from ultralytics import YOLO
 
-model = YOLO('src/../model/yolo26n.pt')
+model = YOLO('model/yolo26n.pt')
 box_annotator = sv.BoxAnnotator()
 label_annotator = sv.LabelAnnotator()
 
