@@ -1,4 +1,4 @@
-#!/Users/ckk/venv/cv/bin/python
+#!/usr/bin/env python
 import os
 
 os.system('pkill -f video_start-cgi.py')

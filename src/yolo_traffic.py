@@ -6,7 +6,7 @@ model = YOLO('model/yolo26n.pt')
 box_annotator = sv.BoxAnnotator()
 label_annotator = sv.LabelAnnotator()
 
-cap = cv2.VideoCapture('https://tcnvr3.taichung.gov.tw/39ad6688')
+cap = cv2.VideoCapture('https://cctv9.kctmc.nat.gov.tw/98cd6bd1/')
 # cap = cv2.VideoCapture('https://cctvs.freeway.gov.tw/live-view/mjpg/video.cgi?camera=1030')
 while True:
     ret, image = cap.read()

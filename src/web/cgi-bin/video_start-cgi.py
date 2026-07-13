@@ -1,4 +1,4 @@
-#!/Users/ckk/venv/cv/bin/python
+#!/usr/bin/env python
 import cv2
 import base64
 import sys
