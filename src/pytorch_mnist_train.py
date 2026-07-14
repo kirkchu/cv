@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 ROOT = 'model'
 BATCH_SIZE = 800
 LR = 0.01
-EPOCH = 40 
+EPOCH = 80 
 # 1. 資料預處理與載入
 train_dataset = datasets.MNIST(root=ROOT, train=True, download=True, transform=ToTensor())
 test_dataset = datasets.MNIST(root=ROOT, train=False, download=True, transform=ToTensor())
