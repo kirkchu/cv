@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 手勢辨識系統</title>
+<style>
+    :root {
+        --neon-cyan: #4dd9ff;
+        --neon-pink: #ff4de3;
+        --neon-purple: #a86bff;
+        --panel-bg: rgba(20, 20, 40, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+        color: #f0f2ff;
+        background: radial-gradient(circle at 20% 20%, #1c1140 0%, #05040f 55%, #000 100%);
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 16px 64px;
+    }
+
+    /* 背景漂浮光暈 */
+    .glow-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.45;
+        z-index: 0;
+        animation: float 12s ease-in-out infinite;
+    }
+    .glow-orb.one { width: 320px; height: 320px; background: var(--neon-cyan); top: -80px; left: -80px; }
+    .glow-orb.two { width: 380px; height: 380px; background: var(--neon-pink); bottom: -120px; right: -100px; animation-delay: -4s; }
+    .glow-orb.three { width: 260px; height: 260px; background: var(--neon-purple); top: 40%; left: 60%; animation-delay: -8s; }
+
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(30px, -30px) scale(1.08); }
+    }
+
+    header {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+
+    header p {
+        margin: 8px 0 0;
+        color: #b7bce0;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+    }
+
+    main {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 880px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .video-card {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+        aspect-ratio: 4 / 3;
+        border-radius: 24px;
+        padding: 3px;
+        background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+        background-size: 300% 300%;
+        animation: shine 6s linear infinite;
+        box-shadow: 0 0 40px rgba(120, 90, 255, 0.35), 0 0 90px rgba(77, 217, 255, 0.15);
+    }
+
+    .video-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #05030d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .video-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .placeholder {
+        color: #6a6f9a;
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .placeholder .icon { font-size: 2.6rem; }
+
+    .status-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        background: rgba(0,0,0,0.45);
+        backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .status-badge .dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #ff4d6d;
+    }
+    .status-badge.live .dot {
+        background: #4dff9e;
+        box-shadow: 0 0 8px #4dff9e;
+        animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .controls {
+        display: flex;
+        gap: 18px;
+    }
+
+    .btn {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        padding: 14px 34px;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        border-radius: 999px;
+        color: #fff;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+    }
+    .btn:active { transform: scale(0.96); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn.start {
+        background: linear-gradient(135deg, #4dd9ff, #6f7bff);
+        box-shadow: 0 8px 24px rgba(77, 217, 255, 0.4);
+    }
+    .btn.start:not(:disabled):hover { box-shadow: 0 10px 32px rgba(77, 217, 255, 0.6); }
+
+    .btn.stop {
+        background: linear-gradient(135deg, #ff4de3, #ff6b6b);
+        box-shadow: 0 8px 24px rgba(255, 77, 227, 0.4);
+    }
+    .btn.stop:not(:disabled):hover { box-shadow: 0 10px 32px rgba(255, 77, 227, 0.6); }
+
+    .results {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+    }
+
+    .hand-card {
+        background: var(--panel-bg);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 18px 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+        animation: card-in 0.35s ease;
+    }
+    @keyframes card-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hand-card .row-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .hand-tag {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .hand-tag.Left { background: rgba(120, 220, 90, 0.2); color: #8dffaa; }
+    .hand-tag.Right { background: rgba(255, 120, 90, 0.2); color: #ff9c8d; }
+
+    .gesture-label {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 4px 0 12px;
+    }
+
+    .score-bar {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        overflow: hidden;
+    }
+    .score-bar .fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        transition: width 0.2s ease;
+    }
+    .score-text {
+        margin-top: 6px;
+        font-size: 0.8rem;
+        color: #b7bce0;
+        text-align: right;
+    }
+
+    .empty-hint {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: #6a6f9a;
+        padding: 20px;
+        font-size: 0.95rem;
+    }
+
+    .error-hint {
+        color: #ff8d8d;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+</style>
+</head>
+<body>
+    <div class="glow-orb one"></div>
+    <div class="glow-orb two"></div>
+    <div class="glow-orb three"></div>
+
+    <header>
+        <h1>✨ AI 手勢辨識系統</h1>
+        <p>Real-time Hand Gesture Recognition · Powered by MediaPipe</p>
+    </header>
+
+    <main>
+        <div class="video-card">
+            <div class="video-inner">
+                <div class="status-badge" id="statusBadge"><span class="dot"></span><span id="statusText">未連線</span></div>
+                <div class="placeholder" id="placeholder">
+                    <div class="icon">🖐️</div>
+                    <div>按下「開始辨識」啟動攝影機</div>
+                </div>
+                <img id="videoImg" style="display:none;">
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn start" id="startBtn">▶ 開始辨識</button>
+            <button class="btn stop" id="stopBtn" disabled>■ 停止</button>
+        </div>
+
+        <div class="results" id="results">
+            <div class="empty-hint" id="emptyHint">目前尚未偵測到手勢</div>
+        </div>
+        <div class="error-hint" id="errorHint"></div>
+    </main>
+
+<script>
+window.onload = () => {
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const videoImg = document.getElementById('videoImg');
+    const placeholder = document.getElementById('placeholder');
+    const statusBadge = document.getElementById('statusBadge');
+    const statusText = document.getElementById('statusText');
+    const results = document.getElementById('results');
+    const emptyHint = document.getElementById('emptyHint');
+    const errorHint = document.getElementById('errorHint');
+
+    let eventSource = null;
+
+    function setLive(isLive) {
+        statusBadge.classList.toggle('live', isLive);
+        statusText.textContent = isLive ? '即時串流中' : '未連線';
+    }
+
+    function updateHandCard(card, hand) {
+        const percent = Math.round((hand.score || 0) * 100);
+        const tag = card.querySelector('.hand-tag');
+        tag.className = `hand-tag ${hand.handedness}`;
+        tag.textContent = hand.handedness === 'Left' ? '左手' : hand.handedness === 'Right' ? '右手' : '未知';
+        card.querySelector('.gesture-label').textContent = hand.label;
+        card.querySelector('.fill').style.width = `${percent}%`;
+        card.querySelector('.score-text').textContent = `信心度 ${percent}%`;
+    }
+
+    function createHandCard(hand) {
+        const card = document.createElement('div');
+        card.className = 'hand-card';
+        card.innerHTML = `
+            <div class="row-top">
+                <span class="hand-tag"></span>
+            </div>
+            <div class="gesture-label"></div>
+            <div class="score-bar"><div class="fill" style="width:0%"></div></div>
+            <div class="score-text"></div>
+        `;
+        updateHandCard(card, hand);
+        return card;
+    }
+
+    function renderHands(hands) {
+        errorHint.textContent = '';
+
+        if (!hands || hands.length === 0) {
+            if (results.children.length !== 1 || results.firstElementChild !== emptyHint) {
+                results.innerHTML = '';
+                results.appendChild(emptyHint);
+            }
+            return;
+        }
+
+        // 第一次出現手部辨識結果時，移除提示文字，改用實際卡片
+        if (results.contains(emptyHint)) {
+            results.innerHTML = '';
+        }
+
+        // 移除多餘的卡片 (手部數量減少時)
+        while (results.children.length > hands.length) {
+            results.removeChild(results.lastElementChild);
+        }
+
+        // 就地更新既有卡片內容，只有新增卡片才建立節點，避免每幀重繪造成閃爍
+        hands.forEach((hand, index) => {
+            const existingCard = results.children[index];
+            if (existingCard) {
+                updateHandCard(existingCard, hand);
+            } else {
+                results.appendChild(createHandCard(hand));
+            }
+        });
+    }
+
+    startBtn.onclick = () => {
+        if (eventSource != null) return;
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        placeholder.style.display = 'none';
+        videoImg.style.display = 'block';
+        errorHint.textContent = '';
+
+        eventSource = new EventSource('/start');
+        eventSource.onmessage = (event) => {
+            let payload;
+            try {
+                payload = JSON.parse(event.data);
+            } catch (e) {
+                return;
+            }
+            if (payload.error) {
+                errorHint.textContent = payload.error === 'camera_open_failed'
+                    ? '⚠️ 無法開啟攝影機，請確認裝置連接與權限'
+                    : payload.error === 'model_not_found'
+                        ? '⚠️ 找不到手勢辨識模型檔案'
+                        : `⚠️ ${payload.error}`;
+                return;
+            }
+            if (payload.image) {
+                videoImg.src = `data:image/jpeg;base64,${payload.image}`;
+                setLive(true);
+            }
+            renderHands(payload.hands);
+        };
+        eventSource.onerror = () => {
+            setLive(false);
+        };
+    };
+
+    stopBtn.onclick = () => {
+        if (eventSource) {
+            eventSource.close();
+            eventSource = null;
+        }
+        fetch('/stop').catch(() => {});
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        setLive(false);
+        videoImg.style.display = 'none';
+        placeholder.style.display = 'flex';
+        results.innerHTML = '';
+        results.appendChild(emptyHint);
+    };
+};
+</script>
+</body>
+</html>
