@@ -5,14 +5,12 @@ import sys
 
 class StreamingEvent:
     def __init__(self):
-        sys.stdout.write('Content-Type: text/event-stream\n\n\n')
-        # print('Content-Type: text/event-stream\n\n')
+        sys.stdout.write('Content-Type: text/event-stream\n\n')
 
     def write(self, frame):
         data = cv2.imencode('.jpg', frame)[1].tobytes()
         base64_encode = base64.b64encode(data).decode('utf-8')
         sys.stdout.write(f'data:{base64_encode}\n\n')
-        # print(f'data:{base64_encode}\n')
         sys.stdout.flush()
 
 streaming = StreamingEvent()

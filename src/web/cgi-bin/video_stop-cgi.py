@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-import os
+import os, sys
 
 os.system('pkill -f video_start-cgi.py')
-print('Content-Type: text/event-stream')
-print('Access-Control-Allow-Origin: *')
-print()
-print(f'data: stop\n')
+sys.stdout.write('Content-Type: text/event-stream\n')
+sys.stdout.write('Access-Control-Allow-Origin: *\n\n')
+sys.stdout.write(f'data: stop\n\n')
+sys.stdout.flush()
