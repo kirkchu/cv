@@ -2,8 +2,8 @@ from deepface import DeepFace
 from operator import itemgetter
 import cv2
 
-img1 = cv2.imread("src/face/face1.jpg")
-img2 = cv2.imread("src/face/face3.jpg")
+img1 = cv2.imread("face/face1.jpg")
+img2 = cv2.imread("face/face3.jpg")
 # 使用 DeepFace 進行人臉比對
 result = DeepFace.verify(
     img1_path=img1, 

@@ -2,7 +2,7 @@ import os
 from ultralytics import YOLO
 
 model_path = os.path.abspath('model/yolo26n-cls.pt')
-dataset_path = os.path.abspath('src/clsdataset')
+dataset_path = os.path.abspath('clsdataset')
 save_dir = os.path.abspath('model/runs/classify')
 
 model = YOLO(model_path)

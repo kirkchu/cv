@@ -34,7 +34,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 # 讀取裝飾圖檔
-decorate_image_path = "src/face/crown.png"  # 替換為你的圖檔路徑
+decorate_image_path = "face/crown.png"  # 替換為你的圖檔路徑
 decorate_image = cv2.imread(decorate_image_path, cv2.IMREAD_UNCHANGED)
 if decorate_image is None:
     raise FileNotFoundError(f"Image not found at {decorate_image_path}")

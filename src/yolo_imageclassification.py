@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 import os
 
-image_path = os.path.abspath('src/data/chair.jpg')
+image_path = os.path.abspath('data/chair.jpg')
 model_path = os.path.abspath('model/yolo26n-cls.pt')
 model = YOLO(model_path)
 results = model(image_path)[0]

@@ -27,13 +27,13 @@ options = FaceLandmarkerOptions(
 face_landmarker = FaceLandmarker.create_from_options(options)
 
 # 讀取圖檔
-image_path = "src/face/face5.jpg"  # 替換為你的圖檔路徑
+image_path = "face/face5.jpg"  # 替換為你的圖檔路徑
 image = cv2.imread(image_path)
 if image is None:
     raise FileNotFoundError(f"Image not found at {image_path}")
 
 # 讀取圖檔
-image_path = "src/face/crown.png"  # 替換為你的圖檔路徑
+image_path = "face/crown.png"  # 替換為你的圖檔路徑
 decorate_image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 if decorate_image is None:
     raise FileNotFoundError(f"Image not found at {image_path}")

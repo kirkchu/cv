@@ -2,7 +2,7 @@ from deepface import DeepFace
 import cv2
 
 # 讀取圖片
-img_path = "src/face/face_voyager.jpg"
+img_path = "face/face_voyager.jpg"
 img = cv2.imread(img_path)
 
 # 使用 deepface 偵測人臉

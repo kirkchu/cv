@@ -1,6 +1,6 @@
 import cv2
 
-image = cv2.imread('src/data/rect.jpg')
+image = cv2.imread('data/rect.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 binary = cv2.threshold(gray, 220, 255, cv2.THRESH_BINARY_INV)[1]
 cv2.imshow('image', binary)

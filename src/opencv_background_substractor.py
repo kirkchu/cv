@@ -1,6 +1,6 @@
 import cv2
 
-cap = cv2.VideoCapture('src/data/vtest.avi')
+cap = cv2.VideoCapture('data/vtest.avi')
 bg = cap.read()[1]
 bg = cv2.cvtColor(bg, cv2.COLOR_BGR2GRAY)
 bg = cv2.GaussianBlur(bg, (17, 17), 0)

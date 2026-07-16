@@ -2,7 +2,7 @@ import cv2
 from deepface import DeepFace
 
 # 設定人臉資料庫路徑
-database_path = "src/face/database"
+database_path = "face/database"
 
 # 開啟攝影機
 cap = cv2.VideoCapture(0)

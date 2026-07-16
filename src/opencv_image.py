@@ -1,7 +1,7 @@
 import cv2
 
 # 讀取圖片
-image = cv2.imread('src/data/cat.jpg')  # 替換為圖片的實際路徑
+image = cv2.imread('data/cat.jpg')  # 替換為圖片的實際路徑
 
 # 檢查圖片是否成功讀取
 if image is None:

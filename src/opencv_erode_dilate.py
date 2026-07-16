@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 讀取圖片
-image = cv2.imread('src/data/erode_dilate.jpg')  # 替換為圖片的實際路徑
+image = cv2.imread('data/erode_dilate.jpg')  # 替換為圖片的實際路徑
 
 # 檢查圖片是否成功讀取
 if image is None:

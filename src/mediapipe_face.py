@@ -12,13 +12,13 @@ options = vision.FaceLandmarkerOptions(
 # 建立 Face Landmarker
 with vision.FaceLandmarker.create_from_options(options) as landmarker:
     # 讀取圖片
-    image = mp.Image.create_from_file('src/face/face.jpg')
+    image = mp.Image.create_from_file('face/face.jpg')
     
     # 進行偵測
     detection_result = landmarker.detect(image)
     
     # 讀取原始圖片用於繪製
-    img = cv2.imread('src/face/face.jpg')
+    img = cv2.imread('face/face.jpg')
     
     # 繪製所有地標點
     if detection_result.face_landmarks:

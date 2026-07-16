@@ -1,7 +1,7 @@
 import cv2
 from ultralytics.models.sam import SAM3SemanticPredictor
 
-IMAGE_PATH = 'src/data/street.jpg'
+IMAGE_PATH = 'data/street.jpg'
 MODEL_PATH = 'model/sam3.pt'
 
 # 建立 SAM 3 predictor，設定信心閾值與模型路徑

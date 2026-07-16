@@ -10,12 +10,12 @@ DB_CONFIG = {
 }
 
 IMGS = [
-    "src/face/database/iu/image1.jpg",
-    "src/face/database/tomcruise/image1.jpg",
-    "src/face/database/eun-bin/image1.jpg",
+    "face/database/iu/image1.jpg",
+    "face/database/tomcruise/image1.jpg",
+    "face/database/eun-bin/image1.jpg",
 ]
 NAMES = ["iu", "tomcruise", "eun-bin"]
-SOURCE_IMG = "src/face/find_test2.jpg"
+SOURCE_IMG = "face/find_test2.jpg"
 DIMENSION = 512
 
 

@@ -2,14 +2,14 @@ import cv2
 import numpy as np
 
 # 讀取底圖與要疊加的圖片
-background = cv2.imread('src/data/beach.jpg')
-overlay = cv2.imread('src/data/lantern.png', cv2.IMREAD_UNCHANGED)
+background = cv2.imread('data/beach.jpg')
+overlay = cv2.imread('data/lantern.png', cv2.IMREAD_UNCHANGED)
 
 if background is None:
-    print("無法讀取 src/data/beach.jpg")
+    print("無法讀取 data/beach.jpg")
     exit(1)
 if overlay is None:
-    print("無法讀取 src/data/lantern.png")
+    print("無法讀取 data/lantern.png")
     exit(1)
 
 # 取得底圖尺寸
@@ -37,5 +37,5 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 # 儲存結果
-cv2.imwrite('src/data/beach_lantern_overlay.jpg', background)
-print("已儲存為 src/data/beach_lantern_overlay.jpg")
+cv2.imwrite('data/beach_lantern_overlay.jpg', background)
+print("已儲存為 data/beach_lantern_overlay.jpg")

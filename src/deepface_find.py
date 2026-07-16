@@ -1,8 +1,8 @@
 from deepface import DeepFace
 
 # 設定來源圖片與資料集資料夾
-source_img = "src/face/find_test1.jpg"
-db_path = "src/face/database"
+source_img = "face/find_test1.jpg"
+db_path = "face/database"
 
 # 執行人臉辨識
 # 使用 retinaface 偵測器，避免 opencv-python 5.x 缺少 haarcascade 資料檔的問題

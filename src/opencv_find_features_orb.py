@@ -1,6 +1,6 @@
 import cv2
 
-image = cv2.imread('src/data/duck.jpg')
+image = cv2.imread('data/duck.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 def update_features(n_features):

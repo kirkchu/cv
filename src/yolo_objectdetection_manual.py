@@ -5,7 +5,7 @@ import cv2
 model = YOLO('src/../model/yolo26n.pt')  # 使用 YOLOv8 的預訓練模型
 
 # 讀取影像
-image_path = 'src/data/bus.jpg'  # 替換為你的影像路徑
+image_path = 'data/bus.jpg'  # 替換為你的影像路徑
 image = cv2.imread(image_path)
 
 # 執行物件偵測

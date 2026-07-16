@@ -1,6 +1,6 @@
 import cv2
 
-image = cv2.imread('src/data/polystar.png')
+image = cv2.imread('data/polystar.png')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 edged = cv2.Canny(gray, 30, 150)
 contours, hierarchy = cv2.findContours(

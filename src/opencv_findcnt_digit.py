@@ -1,7 +1,7 @@
 import cv2
 
 # 讀取圖片（灰階模式）
-img = cv2.imread('src/data/digit.png', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('data/digit.png', cv2.IMREAD_GRAYSCALE)
 
 # 反相二值化（閾值200）
 _, binary = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY_INV)

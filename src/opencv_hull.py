@@ -1,6 +1,6 @@
 import cv2
 
-image = cv2.imread('src/data/polygon.png', 0)
+image = cv2.imread('data/polygon.png', 0)
 edged = cv2.Canny(image, 30, 150)
 contours, hierarchy = cv2.findContours(
     edged, 

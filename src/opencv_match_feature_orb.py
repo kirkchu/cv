@@ -1,10 +1,10 @@
 import cv2
 
-# imgs = ['src/data/duck.jpg', 'src/data/duck2.jpg']
-# imgs = ['src/data/duck.jpg', 'src/data/duck3.jpg']
-imgs = ['src/data/duck.jpg', 'src/data/zebra.jpg']
-# imgs = ['src/data/duck.jpg', 'src/data/chair.jpg']
-# imgs = ['src/data/zebra.jpg', 'src/data/zebra2.jpg']
+# imgs = ['data/duck.jpg', 'data/duck2.jpg']
+# imgs = ['data/duck.jpg', 'data/duck3.jpg']
+imgs = ['data/duck.jpg', 'data/zebra.jpg']
+# imgs = ['data/duck.jpg', 'data/chair.jpg']
+# imgs = ['data/zebra.jpg', 'data/zebra2.jpg']
 
 img1 = cv2.imread(imgs[0])
 img2 = cv2.imread(imgs[1])

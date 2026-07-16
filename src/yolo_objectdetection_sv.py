@@ -2,7 +2,7 @@ import cv2
 import supervision as sv
 from ultralytics import YOLO
 
-image = cv2.imread('src/data/bus.jpg')
+image = cv2.imread('data/bus.jpg')
 model = YOLO("model/yolo26n-seg.pt")
 results = model(image)[0]
 detections = sv.Detections.from_ultralytics(results)

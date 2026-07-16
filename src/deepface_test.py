@@ -3,16 +3,16 @@ import numpy as np
 import faiss
 
 imgs = [
-    "src/face/database/iu/image1.jpg",
-    "src/face/database/tomcruise/image1.jpg",
-    "src/face/database/eun-bin/image1.jpg",
+    "face/database/iu/image1.jpg",
+    "face/database/tomcruise/image1.jpg",
+    "face/database/eun-bin/image1.jpg",
 ]
 names = [
     "iu",
     "tomcruise",
     "eun-bin",
 ]
-source_img = "src/face/find_test2.jpg"
+source_img = "face/find_test2.jpg"
 
 emb = []
 for img in imgs:

@@ -1,7 +1,7 @@
 import cv2
 
 # 讀取圖片
-img = cv2.imread('src/data/zebra.jpg')
+img = cv2.imread('data/zebra.jpg')
 
 # 檢查圖片是否成功讀取
 if img is None:

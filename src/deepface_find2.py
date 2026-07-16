@@ -2,8 +2,8 @@ from deepface import DeepFace
 import cv2
 
 # 設定來源圖片與資料集資料夾
-source_img = "src/face/find_test1.jpg"
-db_path = "src/face/database"
+source_img = "face/find_test1.jpg"
+db_path = "face/database"
 
 # 執行人臉辨識
 results = DeepFace.find(

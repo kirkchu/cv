@@ -1,6 +1,6 @@
 from deepface import DeepFace
 
-source_img = "src/face/find_test1.jpg"
+source_img = "face/find_test1.jpg"
 vector = DeepFace.represent(
     source_img, 
     model_name="Facenet512",

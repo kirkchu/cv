@@ -1,6 +1,6 @@
 import cv2
 
-cap = cv2.VideoCapture('src/data/vtest.avi')
+cap = cv2.VideoCapture('data/vtest.avi')
 tracker = cv2.TrackerCSRT_create()
 roi = None
 while True:

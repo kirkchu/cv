@@ -2,7 +2,7 @@ import easyocr
 import cv2
 import numpy as np
 
-img = cv2.imread('src/data/carplate.jpg')
+img = cv2.imread('data/carplate.jpg')
 reader = easyocr.Reader(['en'])
 results = reader.readtext(img, adjust_contrast=0.1, min_size=50)
 

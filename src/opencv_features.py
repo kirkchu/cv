@@ -1,6 +1,6 @@
 import cv2
 
-image = cv2.imread('src/data/duck.jpg', 0)
+image = cv2.imread('data/duck.jpg', 0)
 feature_sift = cv2.xfeatures2d.SIFT_create()
 # feature_surf = cv2.xfeatures2d.SURF_create()
 feature_orb = cv2.ORB_create(50)

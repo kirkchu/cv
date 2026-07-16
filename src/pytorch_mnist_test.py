@@ -4,7 +4,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 ROOT = 'model'
-TESTING = 'src/data/digit1.png'
+TESTING = 'data/digit1.png'
 device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 model = NeuralNetwork().to(device)
 model.load_state_dict(torch.load(f"{ROOT}/MNIST/model.pth", weights_only=True))

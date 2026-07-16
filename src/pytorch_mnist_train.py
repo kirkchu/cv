@@ -79,7 +79,7 @@ for epoch in range(1, EPOCH + 1):
     train(epoch)
     test()
 
-# torch.save(model.state_dict(), "src/data/MNIST/model.pth")
+# torch.save(model.state_dict(), "data/MNIST/model.pth")
 # print("Saved PyTorch Model State to model.pth")
 
 # 畫圖
