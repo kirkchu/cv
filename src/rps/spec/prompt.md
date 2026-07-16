@@ -1,16 +1,16 @@
 # 目的
-撰寫一套人跟電腦玩剪刀、石頭、布的遊戲
+使用影像辨識完成一套人跟電腦玩剪刀、石頭、布的遊戲
 
 # 規格需求
-1. 使用 MediaPipe 的手勢辨識，參考 https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer。
+1. 使用 MediaPipe 的手勢偵測，參考 https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer。手勢 `Open palm`表示布、`Closed fist` 表示石頭、`Vector` 表示剪刀，其他的手勢在本遊戲中均表示 `無法辨識`。當剪刀、石頭、布中某些手勢無法準確辨識時，可改使用手掌地標透過演算法自行算出。
 2. 需畫出手掌地標，並且使用線條連接各地標。
 3. 當使用者以 `石頭` 手勢前後搖晃時，表示準備動作，往前定住不動表示出拳完畢，電腦隨即出拳並且判定輸贏。
+4. 電腦出拳的圖案使用 rps 資料夾中的 paper.png、rock.png 與 scissors.png 並顯示在畫面上。
 
 # 測試
-使用 test.mov 作為使用者出拳的測試影片，檢查程式碼與邏輯是否有錯，如果有錯自行修正。
+使用 test.mov 作為使用者出拳的測試影片（共出五拳，順序是石頭->剪刀->布->剪刀->布），檢查程式碼與邏輯是否有錯，如果有錯自行修正。
 
 # 其他
 1. 完成的程式碼儲存到 rps 資料夾中
-2. 電腦出拳的圖案使用 rps 資料夾中的 paper.png、rock.png 與 scissors.png
-3. **不可** 讀寫 rps 資料夾以外的檔案
-4. 已使用 uv 建立虛擬環境，已安裝最新版 OpenCV 與 MediaPipe 函數庫，如需要安裝額外軟體，**必須** 取得使用者同意
+2. **不可** 讀寫 rps 資料夾以外的檔案
+3. 已使用 uv 建立虛擬環境，已安裝最新版 OpenCV 與 MediaPipe 函數庫，如需要安裝額外軟體，**必須** 取得使用者同意
